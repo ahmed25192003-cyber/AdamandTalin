@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عالم آدم وتالين 💖</title>
+    <!-- خط عربي مميز من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;700;900&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e1b4b, #31103f);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* ----- شاشة تسجيل الدخول ----- */
+        #login-screen {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 420px;
+            z-index: 10;
+        }
+
+        #login-screen h2 {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 2rem;
+            color: #f472b6;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
+        }
+
+        #login-screen p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 2px solid rgba(244, 114, 182, 0.3);
+            background: rgba(15, 23, 42, 0.6);
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="password"]:focus {
+            border-color: #f472b6;
+            box-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+        }
+
+        button.btn-login {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        button.btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+        }
+
+        #error-msg {
+            color: #ef4444;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* ----- المحتوى الرئيسي للموقع ----- */
+        #main-content {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* العنوان الإحترافي المنور */
+        .glowing-title {
+            font-family: 'Reem Kufi', 'Amiri', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(to right, #f472b6, #38bdf8, #fbbf24, #f472b6);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            animation: shine 4s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(244, 114, 182, 0.6));
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* شبكة الصور */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+
+        .photo-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(244, 114, 182, 0.5);
+            box-shadow: 0 15px 35px rgba(244, 114, 182, 0.25);
+        }
+
+        /* حاوية الصورة لضمان ظهور الوش بالكامل بدون قص */
+        .img-container {
+            width: 100%;
+            height: 350px;
+            background: rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .photo-card img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .caption-box {
+            padding: 18px;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.5);
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .caption-text {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #f3e8ff;
+            line-height: 1.6;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 600px) {
+            .glowing-title { font-size: 2.3rem; }
+            .img-container { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <h2>🔒 موقع العائلة</h2>
+        <p>من فضلك أدخل كلمة السر لرؤية المفاجأة</p>
+        <div class="input-group">
+            <input type="password" id="password-input" placeholder="أدخل كلمة السر هنا...">
+        </div>
+        <button class="btn-login" onclick="checkPassword()">دخول ✨</button>
+        <p id="error-msg">كلمة السر غير صحيحة، حاول مرة أخرى!</p>
+    </div>
+
+    <div id="main-content">
+        <h1 class="glowing-title">✨ آدم & تالين ✨</h1>
+        <div class="gallery-grid">
+            <script>
+                const captions = [
+                    "ضحكة آدم اللي بتنور الدنيا 🌟", "تالين الأميرة الصغيرة 👑", "أحلى أم في الدنيا مع أغلى ما عندها ❤️",
+                    "لحظات دافية ما تتنسيش 🌸", "سعادة القلب بوجودكم سوا 💞", "العيلة الجميلة وضحكتهم الحلوة ✨",
+                    "آدم العسل وتالين السكر 🍬", "ربنا يخليكوا لبعض ويحفظكم 🤲", "أحلى ذكريات تجمعنا سوا 📸",
+                    "الحب والأمان في حضن أمهم 💖", "شقاوتهم ولعبهم الجميل 🎈", "فرحتي بيكوا ملهاش حدود 🌈",
+                    "كل يوم معاكوا هو عيد 🎁", "أغلى حاجة في حياتي 💎", "ربنا يديم وجودكم وضحكتكم يا رب ❤️"
+                ];
+                for (let i = 1; i <= 15; i++) {
+                    document.write(`
+                        <div class="photo-card">
+                            <div class="img-container"><img src="images/${i}.jpg" alt="صورة ${i}"></div>
+                            <div class="caption-box"><p class="caption-text">${captions[i-1]}</p></div>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const input = document.getElementById('password-input').value.trim();
+            const valid = ["0108202203032025", "182022332025", "1/8/20223/3/2025", "01/08/202203/03/2025"];
+            if (valid.includes(input)) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'flex';
+                document.body.style.alignItems = 'flex-start';
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+        document.getElementById('password-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') checkPassword(); });
+    </script>
+</body>
+</html>
